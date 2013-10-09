@@ -124,7 +124,7 @@
 (define (rate-check-helper mag hN n k)
   (let ([hN (bytes->number hN)])
     (cond
-    [(and (> k mag) (eq? hN n)) #f]
+    [(and (> k mag) (= hN n)) #f]
     [(and (< mag k) (< hN n)) (redis-hincrby "counter" "n" "1") #t]
     [else (redis-hset "counter" "n" "0")
           (redis-hset "counter" "current" (number->string (current-inexact-milliseconds)))
